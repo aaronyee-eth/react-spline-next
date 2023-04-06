@@ -7,7 +7,6 @@
   "files": [
     "build",
     "viewer",
-    "type",
     "README.md"
   ],
   "scripts": {
