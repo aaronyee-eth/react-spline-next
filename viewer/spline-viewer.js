@@ -45493,20 +45493,21 @@ var BG = class {
   }
 }, UG = class {
   constructor (
-    e, t, i, r, s, n) {
+    e, t, i, r, s, n, eventContext) {
     this.id = e, this.data = t, this.object = i, this.domElement = n, this.scrollStart = 0, this.scrollEnd = 0, this.actions = On(
-      t, t.actions, i, r, s);
+      t, t.actions, i, r, s), this.eventContext = eventContext;
   }
 
   computeScrollBounds () {
-    let e = this.domElement.getBoundingClientRect(), t = document.body,
-      i = document.documentElement,
-      r = window.pageYOffset || i.scrollTop || t.scrollTop,
-      s = i.clientTop || t.clientTop || 0, n = Math.round(e.top + r - s);
+    let anchorElement = this.domElement.anchorElement || this.domElement;
+    let viewerBox = anchorElement.getBoundingClientRect(), body = document.body,
+      documentElement = document.documentElement,
+      scrollTop = window.pageYOffset || documentElement.scrollTop || body.scrollTop,
+      clientTop = documentElement.clientTop || body.clientTop || 0, viewTopOffset = Math.round(viewerBox.top + scrollTop - clientTop);
     if (this.data.startFrom === 'enter') {
-      let a = window.innerHeight, o = e.height, l = this.data.enterAnchor,
-        h = l === 'top' ? a : l === 'bottom' ? a - o : a - o * .5;
-      this.scrollStart = n - h;
+      let windowHeight = window.innerHeight, viewerHeight = viewerBox.height, enterAnchor = this.data.enterAnchor,
+        h = enterAnchor === 'top' ? windowHeight : enterAnchor === 'bottom' ? windowHeight - viewerHeight : windowHeight - viewerHeight * .5;
+      this.scrollStart = viewTopOffset - h;
     } else this.scrollStart = 0;
     this.scrollStart += this.data.startOffset ??
       0, this.scrollEnd = this.scrollStart +
@@ -45591,7 +45592,7 @@ var BG = class {
           this.wheelEventsPerObject.has(n) ? this.wheelEventsPerObject.get(n)?.
             push(l) : this.wheelEventsPerObject.set(n, [l]);
         } else {
-          let l = new UG(a, o, n, t, i, r);
+          let l = new UG(a, o, n, t, i, r, this.eventContext);
           this.scrollEventsPerObject.has(n) ? this.scrollEventsPerObject.get(
             n)?.push(l) : this.scrollEventsPerObject.set(n, [l]);
         }
@@ -51501,6 +51502,7 @@ var Iv = class {
         this._viewportWidth = this.canvas.clientWidth, this._viewportHeight = this.canvas.clientHeight, this._resize();
       }), this._resizeObserver.observe(this.canvas.parentElement);
     }
+    this.canvas.dispatchEvent(new CustomEvent('init', { detail: { scene: this._scene, sharedAssetsManager: this._sharedAssetsManager, eventManager: this._eventManager, controls: this._controls } }));
     this._rafId === void 0
       ? this.render(performance.now())
       : this.requestRender();

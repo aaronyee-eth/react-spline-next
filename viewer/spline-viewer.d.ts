@@ -2,9 +2,7 @@ import { LitElement } from 'lit';
 export declare type LoadingType = 'auto' | 'lazy' | 'eager';
 export declare type EventsTargetType = 'local' | 'global';
 export declare type HintType = 'drag';
-/**
- * Spline scene viewer
- */
+
 export declare class SplineViewer extends LitElement {
     static styles: import("lit").CSSResult;
     /**
@@ -65,9 +63,4 @@ export declare class SplineViewer extends LitElement {
     updated(changedProperties: Map<string | number | symbol, any>): void;
     connectedCallback(): void;
     disconnectedCallback(): void;
-}
-declare global {
-    interface HTMLElementTagNameMap {
-        'spline-viewer': SplineViewer;
-    }
 }
