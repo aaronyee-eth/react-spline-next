@@ -1,6 +1,6 @@
 {
   "name": "react-spline-next",
-  "version": "0.9.282-release2",
+  "version": "0.9.282-release3",
   "description": "Modified react-spline to support enhanced features",
   "license": "MIT",
   "main": "build/lib/index.js",

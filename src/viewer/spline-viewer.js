@@ -45499,7 +45499,7 @@ var BG = class {
   }
 
   computeScrollBounds () {
-    let anchorElement = this.domElement.anchorElement || this.domElement;
+    let anchorElement = this.eventContext.anchorElement || this.domElement;
     let viewerBox = anchorElement.getBoundingClientRect(), body = document.body,
       documentElement = document.documentElement,
       scrollTop = window.pageYOffset || documentElement.scrollTop || body.scrollTop,
