@@ -1,46 +1,69 @@
 {
   "name": "react-spline-next",
-  "version": "0.9.282",
-  "description": "Spline viewer",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "version": "0.9.282-release2",
+  "description": "Modified react-spline to support enhanced features",
+  "license": "MIT",
+  "main": "build/lib/index.js",
+  "types": "build/lib/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aaronyee-eth/react-spline-next"
+  },
   "files": [
     "build",
-    "viewer",
     "README.md"
   ],
   "scripts": {
-    "build": "tsc",
+    "start": "react-scripts start",
+    "build": "rimraf build && tsc -p src/lib/tsconfig.json && cp -r src/viewer build/viewer",
+    "dev": "tsc -p src/lib/tsconfig.json --watch",
     "format": "prettier src/ --write",
     "typecheck": "tsc",
-    "example": "vite",
-    "test": "npm run test:dev && npm run test:prod",
-    "test:dev": "wtr src",
-    "test:prod": "MODE=prod wtr src"
+    "test": "npm run test:dev && npm run test:prod"
   },
   "keywords": [
-    "web-components",
-    "lit-element",
-    "typescript",
-    "lit"
+    "spline",
+    "react",
+    "animation",
+    "logo",
+    "scroll",
+    "3D",
+    "typescript"
   ],
   "devDependencies": {
     "@open-wc/testing": "^3.1.5",
     "@splinetool/runtime": "0.9.282",
-    "@types/react": "^18.0.33",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/user-event": "^13.2.1",
+    "@types/jest": "^27.0.1",
+    "@types/node": "^16.7.13",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
     "@web/dev-server-esbuild": "^0.3.3",
     "@web/dev-server-legacy": "^1.0.0",
     "@web/test-runner": "^0.13.27",
     "@web/test-runner-playwright": "^0.8.8",
     "@webcomponents/webcomponentsjs": "^2.6.0",
     "cross-env": "^7.0.3",
-    "esbuild": "^0.15.16",
     "prettier": "^2.6.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "rimraf": "^3.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.1",
+    "rimraf": "^4.4.1",
     "typescript": "^5.0.3",
-    "vite": "^4.0.4",
-    "vite-plugin-static-copy": "^0.13.0"
+    "web-vitals": "^2.1.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
